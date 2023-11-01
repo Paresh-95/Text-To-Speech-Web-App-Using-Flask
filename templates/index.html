@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Text to Speech</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Text to Speech</h1>
+        <form method="POST" action="/speak">
+            <div class="form-group">
+                <textarea name="text" rows="5" cols="40" class="input-text" value="Enter New Text Here"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="voice" class="label-voice">Select a Voice:</label>
+                <select name="voice" id="voice" class="select-voice">
+                    {% for voice in voices %}
+                        <option value="{{ voice.id }}">{{ voice.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Speak" class="speak-button">
+            </div>
+        </form>
+        <div class="form-group">
+            <a href="/download" class="download-link">Download as MP3</a>
+        </div>
+        <div class="audio-group">
+            <audio controls class="audio-player" autoplay>
+                <source src="{{ audio_file }}" type="audio/mpeg" >
+            </audio>
+        </div>
+    </div>
+</body>
+</html>
